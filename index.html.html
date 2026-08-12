@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AOOX — Todo imóvel merece um site</title>
+<meta name="description" content="A AOOX cria o site do seu imóvel em até 48h. Pra alugar, pra vender, sem depender só do Airbnb ou do OLX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #111312;
+    --bg-soft: #181B19;
+    --card: #1C1F1D;
+    --line: #2A2E2B;
+    --ink: #F2F1EC;
+    --ink-dim: #A8ACA6;
+    --lime: #C8FF3D;
+    --lime-dim: #93B82C;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+  h1,h2,h3,.display{font-family:'Archivo',sans-serif;}
+  .mono{font-family:'Space Grotesk',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  /* -------- NAV -------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(17,19,18,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{max-width:1180px;margin:0 auto;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:'Archivo',sans-serif;font-weight:900;font-size:22px;letter-spacing:-0.02em;display:flex;align-items:center;gap:2px;}
+  .logo .x{color:var(--lime);}
+  .nav-links{display:flex;gap:32px;align-items:center;}
+  .nav-links a{font-size:14px;color:var(--ink-dim);transition:color .2s;}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{
+    background:var(--lime);color:#0E0F0D;padding:10px 20px;border-radius:999px;
+    font-size:14px;font-weight:600;transition:transform .15s ease;
+  }
+  .nav-cta:hover{transform:translateY(-1px);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--ink);font-size:22px;cursor:pointer;}
+
+  /* -------- HERO -------- */
+  header.hero{
+    padding:150px 0 90px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Space Grotesk',monospace;font-size:13px;color:var(--lime);
+    border:1px solid var(--lime-dim);border-radius:999px;padding:6px 14px;margin-bottom:28px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 1.6s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 4.2rem);
+    font-weight:800;
+    line-height:1.02;
+    letter-spacing:-0.03em;
+    margin-bottom:24px;
+  }
+  .hero h1 .cursor{
+    display:inline-block;width:0.5ch;background:var(--lime);
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  .hero p.lead{
+    font-size:18px;color:var(--ink-dim);max-width:480px;line-height:1.6;margin-bottom:36px;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:28px;}
+  .btn-primary{
+    background:var(--lime);color:#0E0F0D;padding:15px 28px;border-radius:999px;
+    font-weight:700;font-size:15px;display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease;
+    box-shadow:0 0 0 0 rgba(200,255,61,0);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,255,61,0.25);}
+  .btn-ghost{
+    border:1px solid var(--line);color:var(--ink);padding:15px 28px;border-radius:999px;
+    font-weight:600;font-size:15px;transition:border-color .2s, background .2s;
+  }
+  .btn-ghost:hover{border-color:var(--ink-dim);background:var(--bg-soft);}
+  .hero-note{font-size:13px;color:var(--ink-dim);font-family:'Space Grotesk',monospace;}
+
+  /* -------- HERO MOCK BROWSER (thesis visual) -------- */
+  .mock{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;box-shadow:0 30px 80px -20px rgba(0,0,0,0.6);
+  }
+  .mock-bar{
+    display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid var(--line);
+    background:var(--bg-soft);
+  }
+  .mock-dot{width:9px;height:9px;border-radius:50%;background:#3A3E3B;}
+  .mock-url{
+    margin-left:10px;font-family:'Space Grotesk',monospace;font-size:12px;color:var(--ink-dim);
+    background:var(--bg);padding:4px 12px;border-radius:6px;flex:1;
+  }
+  .mock-body{padding:22px;}
+  .mock-photo{
+    width:100%;aspect-ratio:16/8;border-radius:10px;margin-bottom:16px;
+    background:
+      linear-gradient(115deg, #1F2A22 0%, #16201A 45%, #0E1512 100%);
+    position:relative;overflow:hidden;
+  }
+  .mock-photo::after{
+    content:'';position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 30% 70%, rgba(200,255,61,0.10), transparent 55%),
+      radial-gradient(circle at 80% 20%, rgba(200,255,61,0.06), transparent 45%);
+  }
+  .mock-tag{
+    position:absolute;top:14px;left:14px;background:var(--lime);color:#0E0F0D;
+    font-family:'Space Grotesk',monospace;font-weight:700;font-size:11px;
+    padding:5px 10px;border-radius:6px;z-index:2;
+  }
+  .mock-title{font-family:'Archivo',sans-serif;font-weight:800;font-size:19px;margin-bottom:6px;}
+  .mock-sub{font-size:13px;color:var(--ink-dim);margin-bottom:16px;}
+  .mock-price{
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid var(--line);padding-top:16px;
+  }
+  .mock-price .amount{font-family:'Archivo',sans-serif;font-weight:800;font-size:20px;color:var(--lime);}
+  .mock-btn{
+    background:var(--ink);color:var(--bg);font-size:12px;font-weight:700;
+    padding:9px 16px;border-radius:8px;
+  }
+
+  /* -------- MARQUEE / SOCIAL PROOF STRIP -------- */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;overflow:hidden;}
+  .strip-track{display:flex;gap:60px;white-space:nowrap;animation:scroll 26s linear infinite;width:max-content;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .strip-item{font-family:'Space Grotesk',monospace;font-size:14px;color:var(--ink-dim);display:flex;align-items:center;gap:10px;}
+  .strip-item b{color:var(--ink);}
+
+  /* -------- SECTION SHARED -------- */
+  section{padding:100px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-label{
+    font-family:'Space Grotesk',monospace;font-size:13px;color:var(--lime);
+    text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;display:block;
+  }
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;letter-spacing:-0.02em;line-height:1.15;}
+  .section-head p{color:var(--ink-dim);font-size:16px;margin-top:16px;line-height:1.6;}
+
+  /* -------- PROBLEMA -------- */
+  .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .problem-card{background:var(--bg);padding:32px 28px;}
+  .problem-card .icon{font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;color:var(--lime);margin-bottom:16px;}
+  .problem-card h3{font-size:17px;font-weight:700;margin-bottom:10px;}
+  .problem-card p{font-size:14px;color:var(--ink-dim);line-height:1.6;}
+
+  /* -------- COMO FUNCIONA -------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+  .step{position:relative;padding-top:20px;}
+  .step-num{
+    font-family:'Archivo',sans-serif;font-weight:900;font-size:15px;color:#0E0F0D;
+    background:var(--lime);width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  }
+  .step h3{font-size:18px;font-weight:700;margin-bottom:10px;}
+  .step p{font-size:14px;color:var(--ink-dim);line-height:1.65;}
+  .step-line{position:absolute;top:37px;left:34px;width:100%;height:1px;background:var(--line);}
+
+  /* -------- EXEMPLOS -------- */
+  .examples{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .ex-card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    transition:transform .2s ease, border-color .2s ease; display:block;
+  }
+  .ex-card:hover{transform:translateY(-4px);border-color:#3A3E3B;}
+  .ex-swatch{height:6px;width:100%;}
+  .ex-bar{display:flex;align-items:center;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--bg-soft);}
+  .ex-dot{width:8px;height:8px;border-radius:50%;background:#3A3E3B;}
+  .ex-url{margin-left:8px;font-family:'Space Grotesk',monospace;font-size:11px;color:var(--ink-dim);}
+  .ex-photo{aspect-ratio:16/10;position:relative;}
+  .ex-body{padding:20px;}
+  .ex-tag{font-family:'Space Grotesk',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:block;}
+  .ex-title{font-family:'Archivo',sans-serif;font-weight:800;font-size:16px;margin-bottom:6px;}
+  .ex-desc{font-size:13px;color:var(--ink-dim);line-height:1.55;margin-bottom:16px;}
+  .ex-link{font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;}
+  .examples-more{
+    grid-column:1/-1;border:1px dashed var(--line);border-radius:16px;padding:26px 24px;
+    display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  }
+  .examples-more p{color:var(--ink-dim);font-size:14px;max-width:440px;}
+
+  /* -------- PLANOS -------- */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .plan{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:32px 28px;
+    display:flex;flex-direction:column;transition:border-color .2s, transform .2s;
+  }
+  .plan:hover{border-color:#3A3E3B;transform:translateY(-3px);}
+  .plan.featured{
+    border-color:var(--lime);
+    background:linear-gradient(180deg, rgba(200,255,61,0.06), var(--card) 40%);
+    position:relative;
+  }
+  .plan-badge{
+    position:absolute;top:-13px;left:28px;background:var(--lime);color:#0E0F0D;
+    font-family:'Space Grotesk',monospace;font-weight:700;font-size:11px;
+    padding:5px 12px;border-radius:999px;
+  }
+  .plan-name{font-family:'Space Grotesk',monospace;font-size:14px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;}
+  .plan-price{font-family:'Archivo',sans-serif;font-weight:800;font-size:2.4rem;margin-bottom:4px;letter-spacing:-0.02em;}
+  .plan-price span{font-size:15px;color:var(--ink-dim);font-weight:500;font-family:'Inter',sans-serif;}
+  .plan-desc{font-size:13px;color:var(--ink-dim);margin-bottom:24px;}
+  .plan-features{list-style:none;margin-bottom:28px;flex:1;}
+  .plan-features li{
+    font-size:14px;padding:10px 0;border-top:1px solid var(--line);
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .plan-features li:first-child{border-top:none;}
+  .plan-features li .check{color:var(--lime);font-weight:700;}
+  .plan-extra{
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+    border:1px dashed var(--lime-dim);border-radius:10px;padding:12px 14px;margin-bottom:20px;
+  }
+  .plan-extra .extra-name{font-size:13px;display:flex;align-items:center;gap:8px;}
+  .plan-extra .extra-name .plus{color:var(--lime);font-weight:700;}
+  .plan-extra .extra-price{font-family:'Space Grotesk',monospace;font-size:12.5px;color:var(--lime);white-space:nowrap;}
+  .plan-cta{
+    text-align:center;padding:13px;border-radius:999px;font-weight:700;font-size:14px;
+    border:1px solid var(--line);transition:all .2s;
+  }
+  .plan.featured .plan-cta{background:var(--lime);color:#0E0F0D;border-color:var(--lime);}
+  .plan-cta:hover{border-color:var(--ink-dim);}
+
+  /* -------- ANTES/DEPOIS -------- */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .compare-card{border-radius:16px;padding:30px 28px;border:1px solid var(--line);}
+  .compare-card.bad{background:var(--card);}
+  .compare-card.good{background:linear-gradient(180deg, rgba(200,255,61,0.08), var(--card) 60%);border-color:var(--lime-dim);}
+  .compare-label{font-family:'Space Grotesk',monospace;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:20px;display:block;}
+  .compare-card.bad .compare-label{color:#8A8E8B;}
+  .compare-card.good .compare-label{color:var(--lime);}
+  .compare-card ul{list-style:none;}
+  .compare-card li{font-size:14.5px;padding:11px 0;border-top:1px solid var(--line);display:flex;gap:10px;}
+  .compare-card li:first-child{border-top:none;}
+  .compare-card.bad li::before{content:'✕';color:#8A8E8B;font-weight:700;}
+  .compare-card.good li::before{content:'✓';color:var(--lime);font-weight:700;}
+
+  /* -------- FAQ -------- */
+  .faq-item{border-top:1px solid var(--line);padding:22px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;cursor:pointer;
+    font-size:16px;font-weight:600;gap:20px;
+  }
+  .faq-q .plus{font-family:'Space Grotesk',monospace;color:var(--lime);font-size:20px;transition:transform .25s;flex-shrink:0;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .3s ease, padding .3s ease;
+    font-size:14.5px;color:var(--ink-dim);line-height:1.65;
+  }
+  .faq-item.open .faq-a{max-height:200px;padding-top:14px;}
+
+  /* -------- CTA FINAL -------- */
+  .final-cta{
+    background:var(--card);border:1px solid var(--line);border-radius:24px;
+    padding:70px 40px;text-align:center;position:relative;overflow:hidden;
+  }
+  .final-cta::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 0%, rgba(200,255,61,0.12), transparent 60%);
+  }
+  .final-cta h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:16px;position:relative;}
+  .final-cta p{color:var(--ink-dim);font-size:16px;margin-bottom:34px;position:relative;}
+
+  /* -------- FOOTER -------- */
+  footer{border-top:1px solid var(--line);padding:50px 0 30px;}
+  .footer-grid{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:30px;margin-bottom:40px;}
+  .footer-brand p{color:var(--ink-dim);font-size:13px;max-width:260px;margin-top:12px;line-height:1.6;}
+  .footer-cols{display:flex;gap:60px;flex-wrap:wrap;}
+  .footer-col h4{font-size:13px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
+  .footer-col a{display:block;font-size:14px;color:var(--ink);margin-bottom:10px;opacity:0.85;}
+  .footer-col a:hover{opacity:1;}
+  .footer-bottom{
+    border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;
+    font-size:13px;color:var(--ink-dim);flex-wrap:wrap;gap:10px;font-family:'Space Grotesk',monospace;
+  }
+
+  /* -------- RESPONSIVE -------- */
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .nav-toggle{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero{padding-top:120px;}
+    .problem-grid{grid-template-columns:1fr;}
+    .examples{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;gap:44px;}
+    .step-line{display:none;}
+    .plans{grid-template-columns:1fr;}
+    .compare{grid-template-columns:1fr;}
+    .footer-grid{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">A<span class="x">O</span><span class="x">O</span><span class="x">X</span></a>
+    <div class="nav-links">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#exemplos">Exemplos</a>
+      <a href="#planos">Planos</a>
+      <a href="#faq">Dúvidas</a>
+      <a href="#comecar" class="nav-cta">Criar meu site</a>
+    </div>
+    <button class="nav-toggle" aria-label="Abrir menu">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Site no ar em até 48h</span>
+      <h1>Seu imóvel merece<br>um endereço só<span class="cursor">&nbsp;</span><br>dele.</h1>
+      <p class="lead">A AOOX transforma as fotos e informações do seu imóvel em um site profissional pra alugar ou vender — sem depender só de anúncio em plataforma, sem mensalidade de imobiliária.</p>
+      <div class="hero-ctas">
+        <a href="#planos" class="btn-primary">Quero meu site →</a>
+        <a href="#como-funciona" class="btn-ghost">Ver como funciona</a>
+      </div>
+      <span class="hero-note">/// a partir de R$ 297 · sem fidelidade · você é dono do domínio</span>
+    </div>
+
+    <div class="mock">
+      <div class="mock-bar">
+        <div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div>
+        <div class="mock-url">casadaserra.aoox.com.br</div>
+      </div>
+      <div class="mock-body">
+        <div class="mock-photo">
+          <span class="mock-tag">DISPONÍVEL</span>
+        </div>
+        <div class="mock-title">Casa da Serra — Monte Verde</div>
+        <div class="mock-sub">3 quartos · lareira · vista pra montanha</div>
+        <div class="mock-price">
+          <span class="amount">R$ 650<span style="font-size:13px;color:var(--ink-dim);font-family:'Inter',sans-serif;">/noite</span></span>
+          <span class="mock-btn">Reservar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="strip-track">
+    <span class="strip-item mono"><b>Praia</b> · casas e apartamentos</span>
+    <span class="strip-item mono"><b>Serra</b> · chalés e chácaras</span>
+    <span class="strip-item mono"><b>Cidade</b> · flats e coberturas</span>
+    <span class="strip-item mono"><b>Campo</b> · sítios e fazendas</span>
+    <span class="strip-item mono"><b>Praia</b> · casas e apartamentos</span>
+    <span class="strip-item mono"><b>Serra</b> · chalés e chácaras</span>
+    <span class="strip-item mono"><b>Cidade</b> · flats e coberturas</span>
+    <span class="strip-item mono"><b>Campo</b> · sítios e fazendas</span>
+  </div>
+</div>
+
+<section id="problema">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">O problema</span>
+      <h2>Seu imóvel não tem endereço próprio na internet.</h2>
+      <p>Ele só existe dentro do algoritmo de outra empresa — que decide se aparece, cobra taxa por reserva e some se você sair do ar.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">15–20%</div>
+        <h3>de taxa por reserva</h3>
+        <p>Plataformas de aluguel cobram comissão em cada venda. Um site próprio, você paga uma vez e usa pra sempre.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">0</div>
+        <h3>controle sobre o algoritmo</h3>
+        <p>Se a plataforma muda a regra de exibição, seu imóvel cai de posição. Um site seu não depende do humor de ninguém.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">1 de 500</div>
+        <h3>é como você aparece</h3>
+        <p>Perdido entre concorrentes na mesma página de busca. Com site próprio, quem chega já chegou decidido.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="comparacao">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">A diferença</span>
+      <h2>Anúncio em plataforma vs. site próprio</h2>
+    </div>
+    <div class="compare">
+      <div class="compare-card bad">
+        <span class="compare-label">Só no Airbnb / OLX</span>
+        <ul>
+          <li>Comissão em cada reserva ou venda</li>
+          <li>Você compete na mesma página que o concorrente</li>
+          <li>Sem controle sobre layout, fotos ou destaque</li>
+          <li>Se sair do ar, o link do imóvel some com ele</li>
+          <li>Não constrói marca — o cliente lembra da plataforma</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <span class="compare-label">Com site AOOX</span>
+        <ul>
+          <li>Pagamento único, sem comissão por reserva</li>
+          <li>Página só sua — sem concorrente do lado</li>
+          <li>Fotos, textos e preço do seu jeito</li>
+          <li>Domínio e site são seus, pra sempre</li>
+          <li>Link fácil de compartilhar no WhatsApp e Instagram</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">Como funciona</span>
+      <h2>Três passos. Nenhuma dor de cabeça.</h2>
+      <p>Você não precisa entender nada de site. A gente cuida da parte técnica — você só manda as informações do imóvel.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-line"></div>
+        <div class="step-num">1</div>
+        <h3>Você manda as fotos</h3>
+        <p>Um formulário simples: fotos do imóvel, endereço, preço, comodidades e um contato de WhatsApp. Leva 10 minutos.</p>
+      </div>
+      <div class="step">
+        <div class="step-line"></div>
+        <div class="step-num">2</div>
+        <h3>A gente monta o site</h3>
+        <p>Criamos o design, escrevemos a descrição e organizamos tudo pra passar confiança pra quem visita.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Seu site vai ao ar</h3>
+        <p>Em até 48h você recebe o link pronto pra compartilhar — com botão direto de WhatsApp pra fechar negócio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="exemplos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">Exemplos</span>
+      <h2>Cada imóvel com a cara dele — não um template repetido.</h2>
+      <p>Nenhum desses sites parece com o outro. A gente adapta cores, tipografia e estrutura pro tipo de imóvel, porque um sítio não deveria parecer com uma cobertura.</p>
+    </div>
+    <div class="examples">
+      <a href="aoox-modelo-praia.html" target="_blank" class="ex-card">
+        <div class="ex-swatch" style="background:#0F5C57;"></div>
+        <div class="ex-bar"><div class="ex-dot"></div><div class="ex-dot"></div><div class="ex-dot"></div><span class="ex-url">casa-vista-mar</span></div>
+        <div class="ex-photo" style="background:linear-gradient(200deg,#BFE0D9 0%,#6FAFAA 30%,#16645F 62%,#0A3D3A 100%);"></div>
+        <div class="ex-body">
+          <span class="ex-tag" style="color:#4FD6C7;">Praia · temporada</span>
+          <div class="ex-title">Casa Vista Mar</div>
+          <p class="ex-desc">Aluguel por temporada em Búzios — editorial, tons de areia e mar.</p>
+          <span class="ex-link" style="color:#4FD6C7;">Ver site →</span>
+        </div>
+      </a>
+      <a href="aoox-modelo-cidade.html" target="_blank" class="ex-card">
+        <div class="ex-swatch" style="background:#9C7A3C;"></div>
+        <div class="ex-bar"><div class="ex-dot"></div><div class="ex-dot"></div><div class="ex-dot"></div><span class="ex-url">cobertura-jardins</span></div>
+        <div class="ex-photo" style="background:linear-gradient(200deg,#3A3D3F 0%,#202325 55%,#101213 100%);"></div>
+        <div class="ex-body">
+          <span class="ex-tag" style="color:#C9A857;">Cidade · venda</span>
+          <div class="ex-title">Cobertura Jardins</div>
+          <p class="ex-desc">Apartamento de alto padrão à venda — ficha técnica, tom sóbrio.</p>
+          <span class="ex-link" style="color:#C9A857;">Ver site →</span>
+        </div>
+      </a>
+      <a href="aoox-modelo-campo.html" target="_blank" class="ex-card">
+        <div class="ex-swatch" style="background:#8B3A2B;"></div>
+        <div class="ex-bar"><div class="ex-dot"></div><div class="ex-dot"></div><div class="ex-dot"></div><span class="ex-url">sitio-vista-do-vale</span></div>
+        <div class="ex-photo" style="background:linear-gradient(190deg,#CFCE9C 0%,#A6B36C 32%,#6C7F3E 60%,#3C4C24 100%);"></div>
+        <div class="ex-body">
+          <span class="ex-tag" style="color:#D99A6C;">Campo · venda</span>
+          <div class="ex-title">Sítio Vista do Vale</div>
+          <p class="ex-desc">Terra rural à venda — rústico, ficha da terra em vez de ficha de apê.</p>
+          <span class="ex-link" style="color:#D99A6C;">Ver site →</span>
+        </div>
+      </a>
+      <a href="aoox-modelo-serra.html" target="_blank" class="ex-card">
+        <div class="ex-swatch" style="background:#E2762E;"></div>
+        <div class="ex-bar"><div class="ex-dot"></div><div class="ex-dot"></div><div class="ex-dot"></div><span class="ex-url">chale-pedra-grande</span></div>
+        <div class="ex-photo" style="background:linear-gradient(200deg,#4A3B2C 0%,#2B2119 55%,#161009 100%);"></div>
+        <div class="ex-body">
+          <span class="ex-tag" style="color:#F0A05E;">Serra · temporada</span>
+          <div class="ex-title">Chalé Pedra Grande</div>
+          <p class="ex-desc">Aluguel de temporada na montanha — clima de lareira, madeira escura.</p>
+          <span class="ex-link" style="color:#F0A05E;">Ver site →</span>
+        </div>
+      </a>
+      <a href="aoox-modelo-loft.html" target="_blank" class="ex-card">
+        <div class="ex-swatch" style="background:#FF5470;"></div>
+        <div class="ex-bar"><div class="ex-dot"></div><div class="ex-dot"></div><div class="ex-dot"></div><span class="ex-url">loft-vila-madalena</span></div>
+        <div class="ex-photo" style="background:linear-gradient(200deg,#D8D2C4 0%,#B7ADA0 55%,#8C8171 100%);"></div>
+        <div class="ex-body">
+          <span class="ex-tag" style="color:#FF5470;">Cidade · aluguel</span>
+          <div class="ex-title">Loft Vila Madalena</div>
+          <p class="ex-desc">Aluguel mensal pra quem quer morar num loft industrial.</p>
+          <span class="ex-link" style="color:#FF5470;">Ver site →</span>
+        </div>
+      </a>
+      <div class="examples-more">
+        <p>Cada cliente recebe um site pensado pro imóvel dele — essas são só cinco direções possíveis.</p>
+        <a href="#comecar" class="btn-ghost">Quero um assim →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="planos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">Planos</span>
+      <h2>Escolha o tamanho do seu imóvel, não da sua dor de cabeça.</h2>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <span class="plan-name">Essencial</span>
+        <div class="plan-price">R$ 297<span>/único</span></div>
+        <p class="plan-desc">Pra quem quer sair do zero com um site simples e direto.</p>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Site de 1 página</li>
+          <li><span class="check">✓</span> Até 12 fotos</li>
+          <li><span class="check">✓</span> Botão direto de WhatsApp</li>
+          <li><span class="check">✓</span> Domínio aoox.com.br/seuimovel</li>
+          <li><span class="check">✓</span> Entrega em até 48h</li>
+        </ul>
+        <a href="#comecar" class="plan-cta">Escolher Essencial</a>
+      </div>
+      <div class="plan featured">
+        <span class="plan-badge">Mais escolhido</span>
+        <span class="plan-name">Profissional</span>
+        <div class="plan-price">R$ 597<span>/único</span></div>
+        <p class="plan-desc">Pra quem quer alugar e vender no mesmo site, com mais destaque.</p>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Tudo do Essencial</li>
+          <li><span class="check">✓</span> Modo aluguel + venda no mesmo site</li>
+          <li><span class="check">✓</span> Fotos ilimitadas + galeria</li>
+          <li><span class="check">✓</span> Domínio próprio (seuimovel.com.br)</li>
+          <li><span class="check">✓</span> Formulário de reserva/interesse</li>
+          <li><span class="check">✓</span> Otimizado pra aparecer no Google</li>
+        </ul>
+        <div class="plan-extra">
+          <span class="extra-name"><span class="plus">+</span> Vídeo 3D da casa feito com IA</span>
+          <span class="extra-price">+R$150</span>
+        </div>
+        <a href="#comecar" class="plan-cta">Escolher Profissional</a>
+      </div>
+      <div class="plan">
+        <span class="plan-name">Corretor / Rede</span>
+        <div class="plan-price">Sob consulta</div>
+        <p class="plan-desc">Pra quem tem vários imóveis ou é corretor com carteira própria.</p>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Tudo do Profissional</li>
+          <li><span class="check">✓</span> Um site por imóvel, marca única</li>
+          <li><span class="check">✓</span> Painel pra você mesmo atualizar preços</li>
+          <li><span class="check">✓</span> Suporte prioritário</li>
+        </ul>
+        <a href="#comecar" class="plan-cta">Falar com a AOOX</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:760px;">
+    <div class="section-head">
+      <span class="section-label">Dúvidas</span>
+      <h2>Antes de você perguntar</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q">Eu preciso saber alguma coisa de tecnologia? <span class="plus">+</span></div>
+        <div class="faq-a">Não. Você manda fotos e informações por um formulário simples, e a gente cuida de tudo — design, texto e publicação.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">O site substitui o Airbnb? <span class="plus">+</span></div>
+        <div class="faq-a">Não precisa escolher um ou outro. Muita gente usa os dois: mantém o Airbnb pra descoberta e usa o site próprio pra fechar direto com quem já conhece o imóvel, sem taxa.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Tem mensalidade? <span class="plus">+</span></div>
+        <div class="faq-a">O plano Essencial e o Profissional são pagamento único. Só existe uma taxa opcional anual de manutenção de domínio próprio, caso você escolha ter um (a partir de R$ 40/ano).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Consigo alterar preço e fotos depois? <span class="plus">+</span></div>
+        <div class="faq-a">No plano Essencial e Profissional, você fala com a gente e atualizamos pra você em até 24h. No plano Corretor/Rede, você tem um painel pra alterar sozinho quando quiser.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Funciona pra qualquer região do Brasil? <span class="plus">+</span></div>
+        <div class="faq-a">Sim. Todo o processo é feito à distância — você manda as informações, a gente entrega o link, não importa a cidade.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="comecar">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Seu imóvel já devia<br>ter um site.</h2>
+      <p>Manda as informações agora e recebe o site no ar em até 48h.</p>
+      <a href="#" class="btn-primary" style="position:relative;">Criar meu site agora →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">A<span class="x">O</span><span class="x">O</span><span class="x">X</span></a>
+        <p>Sites pra imóveis que ainda não têm o deles. Feito pra quem aluga ou vende direto, sem intermediário.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Produto</h4>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#planos">Planos</a>
+          <a href="#faq">Dúvidas</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <a href="#">WhatsApp</a>
+          <a href="#">contato@aoox.com.br</a>
+          <a href="#">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AOOX. Todos os direitos reservados.</span>
+      <span>Feito no Brasil, pra todo o Brasil.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click',()=>{
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
