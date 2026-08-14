@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AOOX — Todo imóvel merece um site</title>
 <meta name="description" content="A AOOX cria o site do seu imóvel em até 48h. Pra alugar, pra vender, sem depender só do Airbnb ou do OLX.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AOOX — Todo imóvel merece um site">
+<meta property="og:description" content="Sites profissionais pra apresentar seu imóvel, com contato direto pelo WhatsApp. No ar em até 48h.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -100,6 +103,8 @@
     font-weight:600;font-size:15px;transition:border-color .2s, background .2s;
   }
   .btn-ghost:hover{border-color:var(--ink-dim);background:var(--bg-soft);}
+  .final-cta-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+  .final-cta-note{display:block;margin-top:18px;font-size:13px;color:var(--ink-dim);font-family:'Space Grotesk',monospace;}
   .hero-note{font-size:13px;color:var(--ink-dim);font-family:'Space Grotesk',monospace;}
 
   /* -------- HERO MOCK BROWSER (thesis visual) -------- */
@@ -547,13 +552,17 @@
       <div class="plan">
         <span class="plan-name">Essencial</span>
         <div class="plan-price">R$ 297<span>/único</span></div>
-        <p class="plan-desc">Pra quem quer sair do zero com um site simples e direto.</p>
+        <p class="plan-desc">Pra quem quer apresentar o imóvel de um jeito simples, profissional e direto.</p>
         <ul class="plan-features">
-          <li><span class="check">✓</span> Site de 1 página</li>
-          <li><span class="check">✓</span> Até 12 fotos</li>
-          <li><span class="check">✓</span> Botão direto de WhatsApp</li>
-          <li><span class="check">✓</span> Domínio aoox.com.br/seuimovel</li>
+          <li><span class="check">✓</span> Página profissional de 1 imóvel</li>
+          <li><span class="check">✓</span> Até 12 fotos organizadas em galeria</li>
+          <li><span class="check">✓</span> Preço, quartos, banheiros, área e vagas</li>
+          <li><span class="check">✓</span> Botão de WhatsApp com mensagem já pronta</li>
+          <li><span class="check">✓</span> Localização do imóvel</li>
+          <li><span class="check">✓</span> Botão pra compartilhar o imóvel</li>
+          <li><span class="check">✓</span> Link personalizado aoox.com.br/seuimovel</li>
           <li><span class="check">✓</span> Entrega em até 48h</li>
+          <li><span class="check">✓</span> Site otimizado pra celular</li>
         </ul>
         <a href="#comecar" class="plan-cta">Escolher Essencial</a>
       </div>
@@ -561,14 +570,19 @@
         <span class="plan-badge">Mais escolhido</span>
         <span class="plan-name">Profissional</span>
         <div class="plan-price">R$ 597<span>/único</span></div>
-        <p class="plan-desc">Pra quem quer alugar e vender no mesmo site, com mais destaque.</p>
+        <p class="plan-desc">Pra quem quer apresentar e divulgar o imóvel com mais destaque.</p>
         <ul class="plan-features">
           <li><span class="check">✓</span> Tudo do Essencial</li>
           <li><span class="check">✓</span> Modo aluguel + venda no mesmo site</li>
-          <li><span class="check">✓</span> Fotos ilimitadas + galeria</li>
+          <li><span class="check">✓</span> Fotos ilimitadas + galeria profissional</li>
+          <li><span class="check">✓</span> Vídeo do imóvel</li>
+          <li><span class="check">✓</span> Botão "Tenho interesse" (nome, WhatsApp e mensagem)</li>
           <li><span class="check">✓</span> Domínio próprio (seuimovel.com.br)</li>
-          <li><span class="check">✓</span> Formulário de reserva/interesse</li>
-          <li><span class="check">✓</span> Otimizado pra aparecer no Google</li>
+          <li><span class="check">✓</span> Preparado pra aparecer no Google</li>
+          <li><span class="check">✓</span> Status do imóvel: disponível, em negociação ou vendido</li>
+          <li><span class="check">✓</span> Localização com botão de rota</li>
+          <li><span class="check">✓</span> Estatísticas básicas de acesso</li>
+          <li><span class="check">✓</span> Atualizações feitas pela AOOX</li>
         </ul>
         <div class="plan-extra">
           <span class="extra-name"><span class="plus">+</span> Vídeo 3D da casa feito com IA</span>
@@ -579,11 +593,14 @@
       <div class="plan">
         <span class="plan-name">Corretor / Rede</span>
         <div class="plan-price">Sob consulta</div>
-        <p class="plan-desc">Pra quem tem vários imóveis ou é corretor com carteira própria.</p>
+        <p class="plan-desc">Pra corretores, imobiliárias ou qualquer pessoa com vários imóveis.</p>
         <ul class="plan-features">
           <li><span class="check">✓</span> Tudo do Profissional</li>
-          <li><span class="check">✓</span> Um site por imóvel, marca única</li>
-          <li><span class="check">✓</span> Painel pra você mesmo atualizar preços</li>
+          <li><span class="check">✓</span> Vários imóveis, cada um com sua página</li>
+          <li><span class="check">✓</span> Identidade visual personalizada</li>
+          <li><span class="check">✓</span> Domínio próprio da rede</li>
+          <li><span class="check">✓</span> Painel pra atualizar preços, fotos e status</li>
+          <li><span class="check">✓</span> Gestão dos formulários de interesse</li>
           <li><span class="check">✓</span> Suporte prioritário</li>
         </ul>
         <a href="#comecar" class="plan-cta">Falar com a AOOX</a>
@@ -627,8 +644,12 @@
   <div class="wrap">
     <div class="final-cta">
       <h2>Seu imóvel já devia<br>ter um site.</h2>
-      <p>Manda as informações agora e recebe o site no ar em até 48h.</p>
-      <a href="#" class="btn-primary" style="position:relative;">Criar meu site agora →</a>
+      <p>Mande as informações do seu imóvel pelo WhatsApp e a AOOX cuida do resto.</p>
+      <div class="final-cta-actions">
+        <a href="#" class="btn-primary" id="whatsapp-start" style="position:relative;">Quero criar meu site →</a>
+        <a href="#" class="btn-ghost" id="whatsapp-talk">Falar com a AOOX</a>
+      </div>
+      <span class="final-cta-note">Resposta rápida pelo WhatsApp.</span>
     </div>
   </div>
 </section>
@@ -649,8 +670,8 @@
         </div>
         <div class="footer-col">
           <h4>Contato</h4>
-          <a href="#">WhatsApp</a>
-          <a href="#">contato@aoox.com.br</a>
+          <a href="#" id="whatsapp-footer">WhatsApp</a>
+          <a href="mailto:contato@aoox.com.br">contato@aoox.com.br</a>
           <a href="#">Instagram</a>
         </div>
       </div>
@@ -670,6 +691,46 @@
       if(!wasOpen) item.classList.add('open');
     });
   });
+</script>
+
+<script>
+  /* WhatsApp - AOOX */
+  const WHATSAPP_NUMBER = "5542999923702";
+
+  const DEFAULT_MESSAGE = "Olá! Vi a AOOX e quero criar um site para o meu imóvel.";
+
+  const START_MESSAGE = "Olá! Vi a AOOX e quero criar um site para meu imóvel.\n\n" +
+    "Nome: \n" +
+    "Tipo de imóvel: \n" +
+    "Cidade/Estado: \n" +
+    "Alugar ou vender: \n" +
+    "Plano de interesse: \n\n" +
+    "Quero saber como funciona.";
+
+  const TALK_MESSAGE = "Olá! Vi o site da AOOX e gostaria de tirar algumas dúvidas antes de contratar.";
+
+  function whatsappLink(message){
+    return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  }
+
+  function setWhatsappButton(el, message){
+    if(!el) return;
+    el.setAttribute('href', whatsappLink(message));
+    el.setAttribute('target', '_blank');
+    el.setAttribute('rel', 'noopener');
+  }
+
+  // Botões que usam a mensagem padrão (nav)
+  setWhatsappButton(document.querySelector('.nav-cta'), DEFAULT_MESSAGE);
+
+  // "Quero criar meu site" - CTA final, mensagem estruturada
+  setWhatsappButton(document.getElementById('whatsapp-start'), START_MESSAGE);
+
+  // "Falar com a AOOX" - CTA final, dúvidas antes de contratar
+  setWhatsappButton(document.getElementById('whatsapp-talk'), TALK_MESSAGE);
+
+  // WhatsApp no rodapé - mensagem padrão
+  setWhatsappButton(document.getElementById('whatsapp-footer'), DEFAULT_MESSAGE);
 </script>
 
 </body>
