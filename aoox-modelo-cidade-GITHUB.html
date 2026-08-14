@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cobertura Jardins — 178m² à venda</title>
+<meta name="description" content="Cobertura duplex de 178m² nos Jardins, 3 suítes, terraço com churrasqueira. À venda.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cobertura Jardins — 178m² à venda">
+<meta property="og:description" content="Duplex de 178m², 3 suítes e terraço de 60m² nos Jardins, São Paulo. À venda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EDEBE5;
+    --panel:#FBFAF7;
+    --ink:#1B1B18;
+    --ink-dim:#6F6D64;
+    --brass:#9C7A3C;
+    --brass-deep:#6E5628;
+    --line:#D8D4C8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Sora',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+
+  /* -------- BLUEPRINT GRID BG -------- */
+  .blueprint{
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:34px 34px;
+  }
+
+  /* -------- TOPBAR -------- */
+  .topbar{padding:24px 0;border-bottom:1px solid var(--line);}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;}
+  .ref{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-dim);letter-spacing:.04em;}
+  .status{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--brass-deep);border:1px solid var(--brass);border-radius:3px;padding:5px 10px;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .status-dot{width:6px;height:6px;border-radius:50%;background:#2E9E5B;display:inline-block;}
+  .topbar-right{display:flex;align-items:center;gap:12px;}
+  .btn-share{
+    background:transparent;border:1px solid var(--line);color:var(--ink-dim);font-family:'Sora',sans-serif;
+    font-size:12px;padding:6px 12px;border-radius:3px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  }
+  a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--brass);outline-offset:2px;}
+
+  /* -------- HERO -------- */
+  .hero{padding:64px 0 0;}
+  .hero-top{display:grid;grid-template-columns:2fr 1fr;gap:50px;align-items:end;padding-bottom:40px;}
+  .hero h1{font-size:clamp(2rem,4.4vw,3.3rem);font-weight:600;line-height:1.08;letter-spacing:-0.02em;}
+  .hero-addr{font-size:15px;color:var(--ink-dim);margin-top:14px;max-width:420px;}
+  .hero-price{text-align:right;}
+  .hero-price .amount{font-size:2rem;font-weight:700;color:var(--brass-deep);}
+  .hero-price .unit{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim);margin-top:4px;}
+
+  .hero-photo{
+    height:min(58vh,540px);position:relative;overflow:hidden;
+    background:linear-gradient(200deg,#3A3D3F 0%, #202325 55%, #101213 100%);
+  }
+  .hero-photo::after{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 75% 20%, rgba(156,122,60,0.22), transparent 50%);
+  }
+  .hero-photo .plot{
+    position:absolute;left:28px;bottom:28px;color:#EDEBE5;font-family:'IBM Plex Mono',monospace;font-size:12px;
+    letter-spacing:.08em;text-transform:uppercase;opacity:.8;
+  }
+
+  /* -------- SPEC SHEET (signature) -------- */
+  .specs{
+    display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .spec{padding:24px 18px;border-left:1px solid var(--line);}
+  .spec:first-child{border-left:none;}
+  .spec .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.06em;}
+  .spec .v{font-size:19px;font-weight:600;margin-top:6px;}
+
+  /* -------- SECTION SHARED -------- */
+  section{padding:80px 0;}
+  .section-label{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--brass-deep);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;display:block;}
+  .section-head h2{font-size:clamp(1.5rem,2.6vw,2.1rem);font-weight:600;max-width:560px;line-height:1.25;}
+
+  /* -------- DESC + PLAN -------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .split p{color:var(--ink-dim);line-height:1.75;font-size:15px;margin-bottom:16px;}
+  .plan-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:28px;
+  }
+  .plan-row{display:flex;justify-content:space-between;padding:13px 0;border-top:1px solid var(--line);font-size:14px;}
+  .plan-row:first-child{border-top:none;}
+  .plan-row .lbl{color:var(--ink-dim);}
+  .plan-row .val{font-family:'IBM Plex Mono',monospace;font-weight:500;}
+
+  /* -------- GALLERY -------- */
+  .gallery{padding-top:0;}
+  .g-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px;}
+  .gph{border-radius:4px;aspect-ratio:4/3;}
+  .g-grid .gph:first-child{grid-row:1/3;aspect-ratio:auto;}
+  .gph:nth-child(1){background:linear-gradient(155deg,#4A4E4F,#1B1D1E);}
+  .gph:nth-child(2){background:linear-gradient(155deg,#B4A57C,#6E5628);}
+  .gph:nth-child(3){background:linear-gradient(155deg,#8C9B96,#3E4A46);}
+
+  /* -------- FEATURES -------- */
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .feat{background:var(--panel);padding:26px 22px;}
+  .feat .idx{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brass);}
+  .feat h4{font-size:14.5px;font-weight:600;margin:12px 0 6px;}
+  .feat p{font-size:13px;color:var(--ink-dim);line-height:1.55;}
+
+  /* -------- CTA -------- */
+  .cta-band{
+    background:#1B1D1E;color:#EDEBE5;border-radius:6px;padding:50px 44px;
+    display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;
+  }
+  .cta-band h3{font-size:1.4rem;font-weight:600;}
+  .cta-band p{color:#A9A79E;font-size:14px;margin-top:8px;}
+  .btn-brass{
+    background:var(--brass);color:#1B1D1E;padding:15px 26px;border-radius:3px;
+    font-weight:600;font-size:14.5px;white-space:nowrap;transition:background .2s;
+  }
+  .btn-brass:hover{background:#B18E4C;}
+
+  /* -------- INTERESSE -------- */
+  .interest{
+    border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:28px 30px;margin-bottom:0;
+    display:grid;grid-template-columns:1fr auto;gap:22px;align-items:end;
+  }
+  .interest h4{font-size:15px;font-weight:600;margin-bottom:6px;}
+  .interest p{color:var(--ink-dim);font-size:13px;}
+  .interest-fields{display:flex;gap:10px;flex-wrap:wrap;}
+  .interest-fields input{
+    font-family:'Sora',sans-serif;font-size:13.5px;padding:11px 14px;border-radius:3px;
+    border:1px solid var(--line);background:var(--bg);color:var(--ink);min-width:170px;flex:1;
+  }
+  .interest-submit{
+    background:var(--brass-deep);color:var(--panel);border:none;padding:12px 20px;border-radius:3px;
+    font-weight:600;font-size:13.5px;cursor:pointer;font-family:'Sora',sans-serif;white-space:nowrap;
+  }
+
+  /* -------- LOCATION -------- */
+  .loc-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+  .btn-loc{
+    font-size:13px;font-weight:600;padding:10px 16px;border-radius:3px;
+    border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px;
+  }
+  .btn-loc.primary{background:var(--brass-deep);color:var(--panel);border-color:var(--brass-deep);}
+
+  /* -------- FOOTER -------- */
+  footer{border-top:1px solid var(--line);padding:30px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-dim);}
+  footer b{color:var(--brass-deep);}
+
+  @media (max-width:880px){
+    .hero-top{grid-template-columns:1fr;gap:20px;}
+    .hero-price{text-align:left;}
+    .specs{grid-template-columns:repeat(3,1fr);}
+    .spec:nth-child(4){border-left:none;}
+    .split{grid-template-columns:1fr;gap:30px;}
+    .g-grid{grid-template-columns:1fr 1fr;}
+    .g-grid .gph:first-child{grid-row:auto;grid-column:1/3;aspect-ratio:16/9;}
+    .feat-grid{grid-template-columns:1fr 1fr;}
+    .cta-band{padding:34px 26px;}
+  }
+</style>
+</head>
+<body class="blueprint">
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="ref mono">REF. AOOX-2201 · JARDINS, SÃO PAULO</span>
+    <div class="topbar-right">
+      <span class="status"><span class="status-dot" aria-hidden="true"></span>À venda</span>
+      <button type="button" class="btn-share" id="share-btn">↗ Compartilhar</button>
+    </div>
+  </div>
+</div>
+
+<div class="hero wrap">
+  <div class="hero-top">
+    <div>
+      <h1>Cobertura duplex com terraço de 60m².</h1>
+      <p class="hero-addr">Rua Oscar Freire, região dos Jardins — a 2 quadras do Parque Trianon.</p>
+    </div>
+    <div class="hero-price">
+      <div class="amount">R$ 3.450.000</div>
+      <div class="unit mono">≈ R$ 19.382/m²</div>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <span class="plot">Fachada — torre única, 12 andares</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="specs">
+    <div class="spec"><div class="k">Área</div><div class="v">178m²</div></div>
+    <div class="spec"><div class="k">Suítes</div><div class="v">03</div></div>
+    <div class="spec"><div class="k">Vagas</div><div class="v">03</div></div>
+    <div class="spec"><div class="k">Andar</div><div class="v">11–12</div></div>
+    <div class="spec"><div class="k">Ano</div><div class="v">2019</div></div>
+    <div class="spec"><div class="k">IPTU/mês</div><div class="v">R$ 1.140</div></div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="split">
+    <div>
+      <span class="section-label">Sobre o imóvel</span>
+      <h2 style="font-size:1.6rem;margin-bottom:18px;">Dois andares, uma vista que não se repete no bairro.</h2>
+      <p>O andar de baixo concentra a vida social: living integrado, cozinha americana e lavabo. A escada interna leva ao segundo pavimento, onde ficam as três suítes — a master com closet e terraço próprio.</p>
+      <p>O terraço superior tem 60m² cobertos, com churrasqueira, ponto pra ofurô e vista aberta pro Parque Trianon. Prédio com portaria 24h, gerador e apenas duas unidades por andar.</p>
+    </div>
+    <div class="plan-card">
+      <div class="plan-row"><span class="lbl">Condomínio</span><span class="val mono">R$ 2.380 /mês</span></div>
+      <div class="plan-row"><span class="lbl">Aceita financiamento</span><span class="val mono">Sim</span></div>
+      <div class="plan-row"><span class="lbl">Mobiliado</span><span class="val mono">Não</span></div>
+      <div class="plan-row"><span class="lbl">Elevadores</span><span class="val mono">02</span></div>
+      <div class="plan-row"><span class="lbl">Depósito</span><span class="val mono">01 box</span></div>
+      <div class="plan-row"><span class="lbl">Documentação</span><span class="val mono">Regularizada</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap gallery">
+  <span class="section-label">Fotos</span>
+  <div class="g-grid">
+    <div class="gph" role="img" aria-label="Fachada do prédio da Cobertura Jardins"></div>
+    <div class="gph" role="img" aria-label="Living integrado do andar de baixo"></div>
+    <div class="gph" role="img" aria-label="Terraço superior com churrasqueira"></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head" style="margin-bottom:36px;">
+    <span class="section-label">Diferenciais</span>
+    <h2>O que separa essa unidade das outras do prédio.</h2>
+  </div>
+  <div class="feat-grid">
+    <div class="feat"><span class="idx mono">01</span><h4>Terraço privativo</h4><p>Único apartamento do andar com acesso direto ao terraço superior de 60m².</p></div>
+    <div class="feat"><span class="idx mono">02</span><h4>Vista desimpedida</h4><p>Fachada voltada pro parque — sem prédio vizinho bloqueando a vista.</p></div>
+    <div class="feat"><span class="idx mono">03</span><h4>2 vagas + depósito</h4><p>Vagas demarcadas lado a lado, com box de depósito exclusivo no subsolo.</p></div>
+    <div class="feat"><span class="idx mono">04</span><h4>Estrutura pra home office</h4><p>Quarto extra reversível, já com ponto de rede e isolamento acústico.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="interest">
+    <div>
+      <h4>Tenho interesse nesse imóvel</h4>
+      <p>Deixa seu nome e a gente te chama no WhatsApp com mais detalhes.</p>
+    </div>
+    <form class="interest-fields" id="interest-form">
+      <input type="text" id="interest-name" placeholder="Seu nome" required aria-label="Seu nome">
+      <button type="submit" class="interest-submit">Enviar interesse →</button>
+    </form>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="section-label">Localização</span>
+  <div class="split" style="grid-template-columns:1fr 1fr;align-items:center;">
+    <div>
+      <h2 style="font-size:1.3rem;margin-bottom:10px;">Rua Oscar Freire, Jardins — São Paulo</h2>
+      <p>A 2 quadras do Parque Trianon, região central dos Jardins.</p>
+      <div class="loc-actions">
+        <a class="btn-loc primary" href="https://www.google.com/maps/search/?api=1&query=Jardins%2C+Sao+Paulo%2C+SP" target="_blank" rel="noopener">📍 Ver localização</a>
+        <a class="btn-loc" href="https://www.google.com/maps/dir/?api=1&destination=Jardins%2C+Sao+Paulo%2C+SP" target="_blank" rel="noopener">↗ Traçar rota</a>
+      </div>
+    </div>
+    <div class="gph" role="img" aria-label="Mapa ilustrativo da região dos Jardins" style="aspect-ratio:4/3;border-radius:4px;background:linear-gradient(155deg,#D8D4C8,#B4A57C);"></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="cta-band">
+    <div>
+      <h3>Quer marcar uma visita?</h3>
+      <p>Respondemos em até 1h, todos os dias da semana.</p>
+    </div>
+    <a href="#" class="btn-brass" id="whatsapp-cta">Falar no WhatsApp →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>REF. AOOX-2201 © 2026</span>
+    <span>Site feito com <b>✕ AOOX</b></span>
+  </div>
+</footer>
+
+<script>
+  /* Configuração deste imóvel */
+  const WHATSAPP_NUMBER = "5542999923702";
+  const PROPERTY_NAME = "Cobertura Jardins";
+  const PROPERTY_URL = window.location.href;
+
+  // Estrutura preparada pra analytics futuro (pageview, clique no WhatsApp, clique em localização) — sem painel falso, só os pontos de entrada
+  function buildWhatsappLink(message){
+    return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  }
+
+  const whatsappBtn = document.getElementById('whatsapp-cta');
+  if(whatsappBtn){
+    whatsappBtn.setAttribute('href', buildWhatsappLink(
+      "Olá! Vi o imóvel " + PROPERTY_NAME + " no site da AOOX e gostaria de saber mais informações."
+    ));
+    whatsappBtn.setAttribute('target', '_blank');
+    whatsappBtn.setAttribute('rel', 'noopener');
+  }
+
+  const interestForm = document.getElementById('interest-form');
+  if(interestForm){
+    interestForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const nome = document.getElementById('interest-name').value.trim();
+      const msg = "Olá! Meu nome é " + nome + ". Tenho interesse no imóvel " + PROPERTY_NAME + " (AOOX) e gostaria de mais informações.";
+      window.open(buildWhatsappLink(msg), '_blank', 'noopener');
+    });
+  }
+
+  const shareBtn = document.getElementById('share-btn');
+  if(shareBtn){
+    shareBtn.addEventListener('click', async function(){
+      const shareData = { title: PROPERTY_NAME, text: "Dá uma olhada nesse imóvel: " + PROPERTY_NAME, url: PROPERTY_URL };
+      if(navigator.share){
+        try{ await navigator.share(shareData); } catch(err){ /* usuário cancelou */ }
+      } else {
+        try{
+          await navigator.clipboard.writeText(PROPERTY_URL);
+          shareBtn.textContent = "✓ Link copiado";
+          setTimeout(()=>{ shareBtn.textContent = "↗ Compartilhar"; }, 2200);
+        }catch(err){
+          window.open(buildWhatsappLink("Dá uma olhada nesse imóvel: " + PROPERTY_URL), '_blank', 'noopener');
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
