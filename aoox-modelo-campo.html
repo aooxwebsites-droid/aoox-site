@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sítio Vista do Vale — 4 alqueires à venda</title>
+<meta name="description" content="Sítio de 4 alqueires em Monte Verde, com nascente própria, pomar e casa sede de 3 quartos. À venda.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sítio Vista do Vale — 4 alqueires à venda">
+<meta property="og:description" content="4 alqueires com nascente própria, pomar formado e casa sede de 3 quartos em Monte Verde, MG.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wheat:#F3EEDC;
+    --wheat-deep:#E8DFC0;
+    --ink:#2B2A22;
+    --ink-dim:#6B6650;
+    --olive:#48562F;
+    --olive-deep:#33401F;
+    --barn:#8B3A2B;
+    --line:rgba(43,42,34,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--wheat);color:var(--ink);
+    font-family:'Karla',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}}
+  h1,h2,h3,.slab{font-family:'Bitter',serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+
+  /* -------- CONTOUR TEXTURE -------- */
+  .contour{
+    background-image:
+      repeating-radial-gradient(circle at 15% 20%, transparent 0, transparent 38px, rgba(72,86,47,0.05) 39px, rgba(72,86,47,0.05) 40px);
+  }
+
+  /* -------- TOPBAR -------- */
+  .topbar{padding:22px 0;border-bottom:1px solid var(--line);}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;}
+  .place{font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-dim);}
+  .seal{
+    width:40px;height:40px;border-radius:50%;border:1.5px solid var(--barn);color:var(--barn);
+    display:flex;align-items:center;justify-content:center;font-family:'Bitter',serif;font-weight:700;font-size:13px;
+    transform:rotate(-8deg);
+  }
+  .topbar-right{display:flex;align-items:center;gap:14px;}
+  .status-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--olive-deep);}
+  .status-dot{width:7px;height:7px;border-radius:50%;background:#2E9E5B;display:inline-block;}
+  .btn-share{
+    background:transparent;border:1px solid var(--line);color:var(--ink-dim);font-family:'Karla',sans-serif;
+    font-size:12.5px;padding:6px 13px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  }
+  a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--olive);outline-offset:2px;}
+
+  /* -------- HERO -------- */
+  .hero{padding:56px 0 0;}
+  .hero-tag{font-size:13px;color:var(--barn);letter-spacing:.08em;text-transform:uppercase;font-weight:600;}
+  .hero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:600;line-height:1.12;margin-top:14px;max-width:760px;}
+  .hero-sub{font-size:16px;color:var(--ink-dim);max-width:520px;line-height:1.7;margin-top:20px;}
+
+  .hero-photo{
+    height:min(64vh,560px);border-radius:6px;margin-top:38px;position:relative;overflow:hidden;
+    background:linear-gradient(190deg,#CFCE9C 0%, #A6B36C 32%, #6C7F3E 60%, #3C4C24 100%);
+    border:1px solid var(--line);
+  }
+  .hero-photo::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(43,42,34,0.35), transparent 45%);
+  }
+  .hero-label{
+    position:absolute;left:26px;bottom:22px;color:var(--wheat);font-family:'Bitter',serif;font-size:15px;
+  }
+
+  /* -------- FENCE-POST FACTS (signature) -------- */
+  .facts{display:flex;margin-top:0;border-top:1px solid var(--line);}
+  .fact{flex:1;padding:22px 20px;border-right:1px solid var(--line);position:relative;}
+  .fact:last-child{border-right:none;}
+  .fact::before{
+    content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--olive);opacity:0;
+  }
+  .fact .num{font-family:'Bitter',serif;font-size:24px;font-weight:700;color:var(--olive-deep);}
+  .fact .label{font-size:12px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;}
+
+  /* -------- SECTION -------- */
+  section{padding:76px 0;}
+  .eyebrow{font-size:12.5px;color:var(--barn);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:14px;display:block;}
+  .split{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:start;}
+  .split h2{font-size:clamp(1.5rem,2.8vw,2rem);font-weight:600;line-height:1.28;margin-bottom:18px;}
+  .split p{color:var(--ink-dim);line-height:1.75;font-size:15px;margin-bottom:16px;}
+
+  .land-card{background:var(--wheat-deep);border:1px solid var(--line);border-radius:8px;padding:28px;}
+  .land-row{display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line);font-size:14.5px;}
+  .land-row:first-child{border-top:none;}
+  .land-row .lbl{color:var(--ink-dim);}
+  .land-row .val{font-weight:600;}
+
+  /* -------- GALLERY -------- */
+  .g-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .gph{border-radius:6px;aspect-ratio:4/3;border:1px solid var(--line);}
+  .gph:nth-child(1){background:linear-gradient(160deg,#E3C77E,#A87C3D);}
+  .gph:nth-child(2){background:linear-gradient(160deg,#8FA35C,#4A5B2A);}
+  .gph:nth-child(3){background:linear-gradient(160deg,#B7C48E,#5C6E37);}
+
+  /* -------- WHAT IT HAS -------- */
+  .feat-list{border-top:1px solid var(--line);}
+  .feat-row{
+    display:grid;grid-template-columns:200px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line);
+  }
+  .feat-row h4{font-size:16px;font-weight:600;}
+  .feat-row p{color:var(--ink-dim);font-size:14.5px;line-height:1.65;}
+
+  /* -------- CTA -------- */
+  .cta-band{
+    background:var(--olive-deep);color:var(--wheat);border-radius:10px;padding:52px 46px;
+    display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;
+    position:relative;overflow:hidden;
+  }
+  .cta-band::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 85% 15%, rgba(139,58,43,0.35), transparent 55%);
+  }
+  .cta-band h3{font-size:1.5rem;font-weight:600;position:relative;font-family:'Bitter',serif;}
+  .cta-band p{opacity:.8;font-size:14px;margin-top:8px;position:relative;}
+  .btn-barn{
+    background:var(--barn);color:var(--wheat);padding:16px 28px;border-radius:6px;
+    font-weight:600;font-size:14.5px;white-space:nowrap;position:relative;transition:background .2s;
+  }
+  .btn-barn:hover{background:#A64B38;}
+
+  /* -------- INTERESSE -------- */
+  .interest{
+    border:1px solid var(--line);background:var(--wheat-deep);border-radius:10px;padding:30px 32px;
+    display:grid;grid-template-columns:1fr auto;gap:22px;align-items:end;
+  }
+  .interest h4{font-size:16px;font-weight:600;margin-bottom:6px;font-family:'Bitter',serif;}
+  .interest p{color:var(--ink-dim);font-size:13.5px;}
+  .interest-fields{display:flex;gap:10px;flex-wrap:wrap;}
+  .interest-fields input{
+    font-family:'Karla',sans-serif;font-size:14px;padding:11px 15px;border-radius:6px;
+    border:1px solid var(--line);background:var(--wheat);color:var(--ink);min-width:170px;flex:1;
+  }
+  .interest-submit{
+    background:var(--olive-deep);color:var(--wheat);border:none;padding:12px 20px;border-radius:6px;
+    font-weight:600;font-size:14px;cursor:pointer;font-family:'Karla',sans-serif;white-space:nowrap;
+  }
+
+  /* -------- LOCATION -------- */
+  .loc-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+  .btn-loc{
+    font-size:13.5px;font-weight:600;padding:11px 17px;border-radius:6px;
+    border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px;
+  }
+  .btn-loc.primary{background:var(--olive-deep);color:var(--wheat);border-color:var(--olive-deep);}
+
+  /* -------- FOOTER -------- */
+  footer{border-top:1px solid var(--line);padding:30px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink-dim);}
+  footer b{color:var(--olive-deep);}
+
+  @media (max-width:840px){
+    .facts{flex-wrap:wrap;}
+    .fact{flex:1 1 50%;border-right:none;border-bottom:1px solid var(--line);}
+    .split{grid-template-columns:1fr;gap:32px;}
+    .g-grid{grid-template-columns:1fr 1fr;}
+    .feat-row{grid-template-columns:1fr;gap:6px;}
+    .cta-band{padding:36px 26px;}
+  }
+</style>
+</head>
+<body class="contour">
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="place">Monte Verde · <b style="color:var(--ink);">Minas Gerais</b></span>
+    <div class="topbar-right">
+      <span class="status-badge"><span class="status-dot" aria-hidden="true"></span>Disponível</span>
+      <button type="button" class="btn-share" id="share-btn">↗ Compartilhar</button>
+      <div class="seal">MV</div>
+    </div>
+  </div>
+</div>
+
+<div class="hero wrap">
+  <span class="hero-tag">À venda · documentação regularizada</span>
+  <h1>Quatro alqueires de terra, nascente própria e uma casa que já está pronta pra viver.</h1>
+  <p class="hero-sub">Sítio Vista do Vale fica a 12km do centro de Monte Verde, com pomar formado, pasto cercado e uma casa sede reformada em 2023.</p>
+  <div class="hero-photo">
+    <span class="hero-label">Vista da sede olhando pro vale</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="facts">
+    <div class="fact"><div class="num">4 alq.</div><div class="label">Área total</div></div>
+    <div class="fact"><div class="num">03</div><div class="label">Quartos na sede</div></div>
+    <div class="fact"><div class="num">1</div><div class="label">Nascente própria</div></div>
+    <div class="fact"><div class="num">12km</div><div class="label">Do centro</div></div>
+  </div>
+</div>
+
+<section class="wrap">
+  <div class="split">
+    <div>
+      <span class="eyebrow">Sobre a terra</span>
+      <h2>Terra que já trabalha por conta própria, não é só um terreno vazio.</h2>
+      <p>O pomar tem cerca de 80 pés entre laranja, limão e café, todos em produção. O restante da área é dividido entre pasto cercado e mata nativa preservada — com a nascente abastecendo tanto a casa quanto um pequeno açude.</p>
+      <p>A casa sede tem 3 quartos, lareira na sala e varanda de frente pro vale. Reformada em 2023: telhado novo, instalação elétrica revisada e poço além da nascente, como reserva.</p>
+    </div>
+    <div class="land-card">
+      <div class="land-row"><span class="lbl">Água</span><span class="val">Nascente + poço</span></div>
+      <div class="land-row"><span class="lbl">Energia</span><span class="val">Rede + gerador reserva</span></div>
+      <div class="land-row"><span class="lbl">Acesso</span><span class="val">Estrada de terra, todo tempo</span></div>
+      <div class="land-row"><span class="lbl">Cercamento</span><span class="val">100% cercado</span></div>
+      <div class="land-row"><span class="lbl">Escritura</span><span class="val">Registrada, sem pendência</span></div>
+      <div class="land-row"><span class="lbl">Aceita permuta</span><span class="val">A combinar</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="eyebrow">Fotos</span>
+  <div class="g-grid">
+    <div class="gph" role="img" aria-label="Pomar e área de pasto do sítio"></div>
+    <div class="gph" role="img" aria-label="Vista da mata nativa preservada"></div>
+    <div class="gph" role="img" aria-label="Área verde próxima à casa sede"></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="eyebrow">Tenho interesse</span>
+  <div class="interest">
+    <div>
+      <h4>Quer saber mais sobre a terra?</h4>
+      <p>Deixa seu nome e a gente te chama no WhatsApp com mais detalhes.</p>
+    </div>
+    <form class="interest-fields" id="interest-form">
+      <input type="text" id="interest-name" placeholder="Seu nome" required aria-label="Seu nome">
+      <button type="submit" class="interest-submit">Enviar interesse →</button>
+    </form>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="eyebrow">Localização</span>
+  <div class="split" style="grid-template-columns:1fr 1fr;align-items:center;">
+    <div>
+      <h2 style="font-size:1.3rem;">Monte Verde — MG</h2>
+      <p>A 12km do centro, acesso por estrada de terra em bom estado o ano inteiro.</p>
+      <div class="loc-actions">
+        <a class="btn-loc primary" href="https://www.google.com/maps/search/?api=1&query=Monte+Verde%2C+MG" target="_blank" rel="noopener">📍 Ver localização</a>
+        <a class="btn-loc" href="https://www.google.com/maps/dir/?api=1&destination=Monte+Verde%2C+MG" target="_blank" rel="noopener">↗ Traçar rota</a>
+      </div>
+    </div>
+    <div class="gph" role="img" aria-label="Mapa ilustrativo da região de Monte Verde" style="aspect-ratio:4/3;background:linear-gradient(160deg,#CFCE9C,#6C7F3E);"></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="eyebrow">O que vem junto</span>
+  <div class="feat-list">
+    <div class="feat-row"><h4>Pomar formado</h4><p>Cerca de 80 pés entre laranja, limão e café, já em fase de produção — não precisa esperar plantio novo pegar.</p></div>
+    <div class="feat-row"><h4>Curral e cocheira</h4><p>Estrutura simples de madeira, pronta pra quem quer manter cavalos ou gado de pequeno porte.</p></div>
+    <div class="feat-row"><h4>Galpão de apoio</h4><p>40m² cobertos, hoje usado pra ferramentas e uma pequena oficina.</p></div>
+    <div class="feat-row"><h4>Acesso pra caminhão</h4><p>Estrada interna larga o suficiente pra entrada e saída de material, sem precisar de trator pra rebocar.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="cta-band">
+    <div>
+      <h3>Quer conhecer a terra pessoalmente?</h3>
+      <p>Agendamos visita com guia no mesmo dia útil.</p>
+    </div>
+    <a href="#" class="btn-barn" id="whatsapp-cta">Agendar visita pelo WhatsApp →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Sítio Vista do Vale © 2026</span>
+    <span>Site feito com <b>✕ AOOX</b></span>
+  </div>
+</footer>
+
+<script>
+  /* Configuração deste imóvel */
+  const WHATSAPP_NUMBER = "5542999923702";
+  const PROPERTY_NAME = "Sítio Vista do Vale";
+  const PROPERTY_URL = window.location.href;
+
+  // Estrutura preparada pra analytics futuro (pageview, clique no WhatsApp, clique em localização) — sem painel falso, só os pontos de entrada
+  function buildWhatsappLink(message){
+    return "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(message);
+  }
+
+  const whatsappBtn = document.getElementById('whatsapp-cta');
+  if(whatsappBtn){
+    whatsappBtn.setAttribute('href', buildWhatsappLink(
+      "Olá! Vi o imóvel " + PROPERTY_NAME + " no site da AOOX e gostaria de saber mais informações."
+    ));
+    whatsappBtn.setAttribute('target', '_blank');
+    whatsappBtn.setAttribute('rel', 'noopener');
+  }
+
+  const interestForm = document.getElementById('interest-form');
+  if(interestForm){
+    interestForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const nome = document.getElementById('interest-name').value.trim();
+      const msg = "Olá! Meu nome é " + nome + ". Tenho interesse no imóvel " + PROPERTY_NAME + " (AOOX) e gostaria de mais informações.";
+      window.open(buildWhatsappLink(msg), '_blank', 'noopener');
+    });
+  }
+
+  const shareBtn = document.getElementById('share-btn');
+  if(shareBtn){
+    shareBtn.addEventListener('click', async function(){
+      const shareData = { title: PROPERTY_NAME, text: "Dá uma olhada nesse imóvel: " + PROPERTY_NAME, url: PROPERTY_URL };
+      if(navigator.share){
+        try{ await navigator.share(shareData); } catch(err){ /* usuário cancelou */ }
+      } else {
+        try{
+          await navigator.clipboard.writeText(PROPERTY_URL);
+          shareBtn.textContent = "✓ Link copiado";
+          setTimeout(()=>{ shareBtn.textContent = "↗ Compartilhar"; }, 2200);
+        }catch(err){
+          window.open(buildWhatsappLink("Dá uma olhada nesse imóvel: " + PROPERTY_URL), '_blank', 'noopener');
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
