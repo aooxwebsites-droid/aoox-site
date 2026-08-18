@@ -290,6 +290,136 @@
 
   /* -------- FOOTER -------- */
   footer{border-top:1px solid var(--line);padding:50px 0 30px;}
+
+  /* ════════════════════════════════════════════
+     ELEMENTOS FUTURISTAS & DIVISORES
+  ════════════════════════════════════════════ */
+
+  /* Gradientes de transição entre seções */
+  .seg-fade{
+    position:relative;height:120px;pointer-events:none;overflow:hidden;
+  }
+  .seg-fade::before{
+    content:'';position:absolute;inset:0;
+  }
+  /* hero → problema: lime suave */
+  .seg-lime-to-dark::before{
+    background:linear-gradient(to bottom,
+      rgba(200,255,61,0.07) 0%,
+      rgba(200,255,61,0.03) 30%,
+      transparent 100%);
+  }
+  /* problema → comparação: roxo-esmeralda opalescente */
+  .seg-opal-purple::before{
+    background:linear-gradient(135deg,
+      rgba(120,80,200,0.08) 0%,
+      rgba(40,200,160,0.06) 50%,
+      rgba(200,255,61,0.04) 100%);
+  }
+  /* como funciona → exemplos: azul-ciano */
+  .seg-opal-cyan::before{
+    background:linear-gradient(135deg,
+      rgba(40,160,220,0.07) 0%,
+      rgba(80,220,200,0.05) 50%,
+      rgba(200,255,61,0.03) 100%);
+  }
+  /* planos → FAQ: âmbar-lime */
+  .seg-opal-amber::before{
+    background:linear-gradient(135deg,
+      rgba(220,160,40,0.06) 0%,
+      rgba(160,220,80,0.05) 50%,
+      rgba(200,255,61,0.04) 100%);
+  }
+
+  /* Linha de scan animada */
+  .scan-line{
+    position:relative;height:2px;overflow:hidden;margin:0;
+  }
+  .scan-line::after{
+    content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+    background:linear-gradient(90deg, transparent, var(--lime), rgba(200,255,61,0.4), transparent);
+    animation:scan 3s ease-in-out infinite;
+  }
+  @keyframes scan{
+    0%{left:-60%;}100%{left:160%;}
+  }
+
+  /* Divisor com grid de pontos (tech) */
+  .dot-grid-divider{
+    position:relative;height:80px;overflow:hidden;pointer-events:none;
+  }
+  .dot-grid-divider::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(circle, rgba(200,255,61,0.18) 1px, transparent 1px);
+    background-size:28px 28px;
+    mask-image:linear-gradient(to bottom, transparent, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.5) 60%, transparent);
+    -webkit-mask-image:linear-gradient(to bottom, transparent, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.5) 60%, transparent);
+  }
+
+  /* Divisor com linhas circulares tipo radar */
+  .radar-divider{
+    position:relative;height:100px;overflow:hidden;pointer-events:none;display:flex;align-items:center;justify-content:center;
+  }
+  .radar-divider::before,
+  .radar-divider::after{
+    content:'';position:absolute;border-radius:50%;border:1px solid rgba(200,255,61,0.12);
+    animation:radar-expand 3.5s ease-out infinite;
+  }
+  .radar-divider::before{
+    width:200px;height:200px;animation-delay:0s;
+  }
+  .radar-divider::after{
+    width:300px;height:300px;animation-delay:1s;
+  }
+  @keyframes radar-expand{
+    0%{opacity:0.7;transform:scale(0.6);}
+    100%{opacity:0;transform:scale(1);}
+  }
+  .radar-line{
+    width:100%;height:1px;
+    background:linear-gradient(90deg,
+      transparent 0%,
+      rgba(200,255,61,0.06) 20%,
+      rgba(200,255,61,0.18) 50%,
+      rgba(200,255,61,0.06) 80%,
+      transparent 100%);
+    position:relative;z-index:1;
+  }
+
+  /* Divisor com código terminal */
+  .terminal-divider{
+    padding:20px 0;display:flex;align-items:center;justify-content:center;gap:16px;
+    pointer-events:none;
+  }
+  .terminal-divider .t-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line));}
+  .terminal-divider .t-line:last-child{background:linear-gradient(90deg,var(--line),transparent);}
+  .terminal-tag{
+    font-family:'Space Grotesk',monospace;font-size:11px;color:var(--lime-dim);
+    border:1px solid rgba(200,255,61,0.15);border-radius:4px;padding:4px 10px;
+    white-space:nowrap;background:rgba(200,255,61,0.04);
+  }
+
+  /* Divisor opalescente (curva SVG) com glitch */
+  .opal-wave{
+    position:relative;height:60px;overflow:hidden;pointer-events:none;
+  }
+  .opal-wave svg{
+    position:absolute;bottom:0;left:0;width:100%;
+  }
+
+  /* Gradiente body geral — sutil profundidade */
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(200,255,61,0.04), transparent),
+      radial-gradient(ellipse 60% 30% at 100% 60%, rgba(80,200,180,0.03), transparent),
+      radial-gradient(ellipse 60% 30% at 0% 80%, rgba(120,80,200,0.03), transparent);
+  }
+  body > *{position:relative;z-index:1;}
+  nav{z-index:100;}
+
+  /* -------- FOOTER CSS -------- */
+  footer{border-top:1px solid var(--line);padding:50px 0 30px;}
   .footer-grid{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:30px;margin-bottom:40px;}
   .footer-brand p{color:var(--ink-dim);font-size:13px;max-width:260px;margin-top:12px;line-height:1.6;}
   .footer-cols{display:flex;gap:60px;flex-wrap:wrap;}
@@ -301,7 +431,57 @@
     font-size:13px;color:var(--ink-dim);flex-wrap:wrap;gap:10px;font-family:'Space Grotesk',monospace;
   }
 
-  /* -------- RESPONSIVE -------- */
+  /* -------- SOCIAL PROOF / NÚMEROS -------- */
+  .numbers{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+    margin-bottom:0;
+  }
+  .number-cell{background:var(--card);padding:40px 36px;}
+  .number-cell .n{
+    font-family:'Archivo',sans-serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;
+    letter-spacing:-0.03em;color:var(--lime);line-height:1;
+  }
+  .number-cell .label{font-size:14px;color:var(--ink-dim);margin-top:8px;line-height:1.5;}
+
+  /* -------- PARA QUEM É -------- */
+  .for-whom{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .fw-card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px 24px;
+    position:relative;overflow:hidden;
+  }
+  .fw-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--lime);opacity:0;
+    transition:opacity .2s;
+  }
+  .fw-card:hover::before{opacity:1;}
+  .fw-icon{font-size:28px;margin-bottom:16px;}
+  .fw-card h3{font-size:16px;font-weight:700;margin-bottom:8px;}
+  .fw-card p{font-size:13.5px;color:var(--ink-dim);line-height:1.6;}
+
+  /* -------- GARANTIA -------- */
+  .guarantee{
+    background:linear-gradient(135deg, #1C1F1D 0%, #151817 100%);
+    border:1px solid var(--line);border-radius:20px;padding:52px 48px;
+    display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
+    position:relative;overflow:hidden;
+  }
+  .guarantee::after{
+    content:'';position:absolute;right:-60px;top:-60px;
+    width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle, rgba(200,255,61,0.08), transparent 70%);
+  }
+  .guarantee h3{font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;}
+  .guarantee p{font-size:15px;color:var(--ink-dim);line-height:1.65;max-width:520px;}
+  .guarantee-badge{
+    width:110px;height:110px;border-radius:50%;
+    border:2px solid var(--lime);display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;flex-shrink:0;position:relative;z-index:1;
+  }
+  .guarantee-badge .g-num{font-family:'Archivo',sans-serif;font-size:2rem;font-weight:800;color:var(--lime);line-height:1;}
+  .guarantee-badge .g-label{font-size:10px;color:var(--ink-dim);margin-top:4px;line-height:1.3;}
+
+  /* -------- RESPONSIVE ADDITIONS -------- */
   @media (max-width:900px){
     .nav-links{display:none;}
     .nav-toggle{display:block;}
@@ -314,6 +494,10 @@
     .plans{grid-template-columns:1fr;}
     .compare{grid-template-columns:1fr;}
     .footer-grid{flex-direction:column;}
+    .numbers{grid-template-columns:1fr;}
+    .for-whom{grid-template-columns:1fr;}
+    .guarantee{grid-template-columns:1fr;text-align:center;}
+    .guarantee-badge{margin:0 auto;}
   }
 </style>
 
@@ -394,6 +578,15 @@
   </div>
 </div>
 
+<!-- ░░ DIVISOR: hero → problema ░░ -->
+<div class="seg-fade seg-lime-to-dark"></div>
+<div class="scan-line"></div>
+<div class="terminal-divider">
+  <div class="t-line"></div>
+  <span class="terminal-tag">// inicializando análise de mercado</span>
+  <div class="t-line"></div>
+</div>
+
 <section id="problema">
   <div class="wrap">
     <div class="section-head">
@@ -420,6 +613,15 @@
     </div>
   </div>
 </section>
+
+<!-- ░░ DIVISOR: problema → comparação ░░ -->
+<div class="dot-grid-divider"></div>
+<div class="seg-fade seg-opal-purple"></div>
+<div class="terminal-divider">
+  <div class="t-line"></div>
+  <span class="terminal-tag">// comparando cenários</span>
+  <div class="t-line"></div>
+</div>
 
 <section id="comparacao">
   <div class="wrap">
@@ -452,6 +654,15 @@
   </div>
 </section>
 
+<!-- ░░ DIVISOR: comparação → como funciona ░░ -->
+<div class="radar-divider"><div class="radar-line"></div></div>
+<div class="seg-fade seg-opal-cyan"></div>
+<div class="terminal-divider">
+  <div class="t-line"></div>
+  <span class="terminal-tag">// carregando processo</span>
+  <div class="t-line"></div>
+</div>
+
 <section id="como-funciona">
   <div class="wrap">
     <div class="section-head">
@@ -480,6 +691,15 @@
     </div>
   </div>
 </section>
+
+<!-- ░░ DIVISOR: como funciona → exemplos ░░ -->
+<div class="scan-line"></div>
+<div class="dot-grid-divider"></div>
+<div class="terminal-divider">
+  <div class="t-line"></div>
+  <span class="terminal-tag">// renderizando portfólio</span>
+  <div class="t-line"></div>
+</div>
 
 <section id="exemplos">
   <div class="wrap">
@@ -552,6 +772,15 @@
   </div>
 </section>
 
+<!-- ░░ DIVISOR: exemplos → planos ░░ -->
+<div class="seg-fade seg-opal-amber"></div>
+<div class="radar-divider"><div class="radar-line"></div></div>
+<div class="terminal-divider">
+  <div class="t-line"></div>
+  <span class="terminal-tag">// selecionando plano de acesso</span>
+  <div class="t-line"></div>
+</div>
+
 <section id="planos">
   <div class="wrap">
     <div class="section-head">
@@ -607,6 +836,15 @@
   </div>
 </section>
 
+<!-- ░░ DIVISOR: planos → FAQ ░░ -->
+<div class="scan-line"></div>
+<div class="seg-fade seg-opal-purple"></div>
+<div class="terminal-divider">
+  <div class="t-line"></div>
+  <span class="terminal-tag">// abrindo base de conhecimento</span>
+  <div class="t-line"></div>
+</div>
+
 <section id="faq">
   <div class="wrap" style="max-width:760px;">
     <div class="section-head">
@@ -638,7 +876,80 @@
   </div>
 </section>
 
+<!-- ░░ DIVISOR: FAQ → CTA final ░░ -->
+<div class="radar-divider"><div class="radar-line"></div></div>
+<div class="seg-fade seg-lime-to-dark"></div>
+<div class="terminal-divider">
+  <div class="t-line"></div>
+  <span class="terminal-tag">// pronto para iniciar</span>
+  <div class="t-line"></div>
+</div>
+
 <section id="comecar">
+
+<!-- -------- NÚMEROS -------- -->
+<section style="padding:0 0 80px;">
+  <div class="wrap">
+    <div class="numbers">
+      <div class="number-cell">
+        <div class="n">48h</div>
+        <div class="label">Site no ar após enviar<br>as fotos e informações</div>
+      </div>
+      <div class="number-cell">
+        <div class="n">R$ 0</div>
+        <div class="label">De mensalidade.<br>Pagamento único, sem surpresa.</div>
+      </div>
+      <div class="number-cell">
+        <div class="n">100%</div>
+        <div class="label">Online. Você manda tudo pelo<br>WhatsApp, a gente resolve.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- -------- PARA QUEM É -------- -->
+<section style="padding:0 0 80px;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">Pra quem é</span>
+      <h2>Qualquer imóvel merece uma página só dele.</h2>
+    </div>
+    <div class="for-whom">
+      <div class="fw-card">
+        <div class="fw-icon">🏖️</div>
+        <h3>Dono de casa de temporada</h3>
+        <p>Cansado de pagar taxa pro Airbnb em toda reserva? Tenha seu link e feche direto com quem já te conhece.</p>
+      </div>
+      <div class="fw-card">
+        <div class="fw-icon">🏙️</div>
+        <h3>Quem quer vender sem imobiliária</h3>
+        <p>Um site profissional aumenta a credibilidade e facilita o contato — sem depender de anúncio espremido numa lista.</p>
+      </div>
+      <div class="fw-card">
+        <div class="fw-icon">🤝</div>
+        <h3>Corretor com carteira própria</h3>
+        <p>Cada imóvel da sua carteira com site próprio, com a sua marca. Impressiona cliente e fecha mais rápido.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- -------- GARANTIA -------- -->
+<section style="padding:0 0 100px;">
+  <div class="wrap">
+    <div class="guarantee">
+      <div>
+        <h3>Se não ficar bom,<br>a gente refaz.</h3>
+        <p>Depois de entregar o site, você tem 7 dias pra pedir ajustes sem custo extra. Se não ficar do jeito que esperava, revisamos até estar certo — sem burocracia, direto no WhatsApp.</p>
+      </div>
+      <div class="guarantee-badge">
+        <span class="g-num">7</span>
+        <span class="g-label">dias de<br>revisão<br>gratuita</span>
+      </div>
+    </div>
+  </div>
+</section>
+
   <div class="wrap">
     <div class="final-cta">
       <h2>Seu imóvel já devia<br>ter um site.</h2>
@@ -665,7 +976,7 @@
         <div class="footer-col">
           <h4>Contato</h4>
           <a href="#">WhatsApp</a>
-          <a href="#">aoox.websites@gmail.com</a>
+          <a href="#">contato@aoox.com.br</a>
           <a href="https://www.instagram.com/aooxwebsites?igsh=M3NoZTcyN3N4ejNq" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
       </div>
