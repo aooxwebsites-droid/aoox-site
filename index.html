@@ -549,6 +549,184 @@ nav .nav-inner{gap:22px}.nav-links{gap:24px}.nav-links a{white-space:nowrap}
 @media(max-width:900px){section{padding:78px 0}.service-grid,.application-grid,.segment-grid,.content-grid,.ad-examples,.price-grid,.split{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow-step:not(:last-child):after{content:'↓';right:20px;top:auto;bottom:-13px}.plan-group-head{align-items:start;flex-direction:column}.nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;background:var(--bg);padding:22px 28px;flex-direction:column;border-bottom:1px solid var(--line)}.nav-links.open a{font-size:14px}.nav-toggle{display:block}.hero-grid{gap:40px}.segment-grid{grid-template-columns:1fr}.console-main:after{font-size:16px}}
 @media(max-width:540px){.wrap{padding:0 20px}.hero-ctas{flex-direction:column}.hero-ctas a{text-align:center;justify-content:center}.plan{padding:28px 22px}.service-card,.application-card,.segment-card,.content-card,.ad-example{padding:23px}.final-cta{padding:52px 22px}.footer-cols{gap:35px}}
 </style>
+
+
+<!-- RESPONSIVIDADE UNIVERSAL AOOX — correções de leitura e de recorte -->
+<style id="aoox-responsive-fix">
+/* Impede que conteúdos de grids e flexboxes forcem a largura da página. */
+html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;max-width:100%;overflow-x:hidden}
+*,*::before,*::after{min-width:0}
+.wrap{width:100%;max-width:1180px;margin-inline:auto}
+img,svg,video,iframe,canvas{max-width:100%;height:auto}
+
+/* Todo o texto pode quebrar sem ser cortado. */
+h1,h2,h3,h4,p,li,a,span,small,.faq-q,.faq-a,.plan-price,.plan-name,.terminal-tag{
+ overflow-wrap:anywhere;
+ word-break:normal;
+ hyphens:auto;
+}
+p,li,.faq-a{line-height:1.65}
+.btn-primary,.btn-ghost,.plan-cta,.nav-cta{white-space:normal;max-width:100%;text-align:center;justify-content:center}
+.hero h1{max-width:100%}
+.hero p.lead{max-width:100%}
+
+/* Os elementos principais nunca ultrapassam o contentor. */
+.hero-grid,.service-grid,.application-grid,.examples,.ad-examples,.content-grid,.steps,.segment-grid,.compare,.price-grid,.footer-grid,.footer-cols,.flow{width:100%;max-width:100%}
+.hero-grid>*,.service-grid>*,.application-grid>*,.examples>*,.ad-examples>*,.content-grid>*,.steps>*,.segment-grid>*,.compare>*,.price-grid>*,.footer-grid>*,.flow>*{min-width:0;max-width:100%}
+.service-card,.application-card,.segment-card,.content-card,.ad-example,.solution-panel,.plan,.compare-card,.final-cta,.media-note,.price-note,.examples-more{height:auto;max-width:100%}
+.plan-price{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:5px;row-gap:6px}
+.plan-price span{white-space:normal}
+.plan-features li{align-items:flex-start}
+.plan-features .check{flex:0 0 auto}
+.examples-more{align-items:flex-start}
+.faq-q{line-height:1.45}
+.faq-q .plus{margin-left:auto}
+.faq-item.open .faq-a{max-height:1000px}
+
+/* Evita saltos e recortes provocados pelo efeito 3D em dispositivos tácteis. */
+@media (hover:none),(pointer:coarse){
+ .tilt,.tilt:hover,.ex-card,.plan,.service-card,.segment-card{transform:none!important;transition:border-color .2s ease,box-shadow .2s ease!important}
+}
+
+/* Portátil pequeno e tablet horizontal. */
+@media (max-width:1100px){
+ .wrap{padding-inline:24px}
+ .nav-inner{padding-inline:24px}
+ .nav-links{gap:12px}
+ .nav-links a{font-size:12px}
+ .service-grid,.application-grid,.content-grid,.ad-examples,.segment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .solution-panel{grid-column:1/-1!important}
+ .price-grid{gap:16px}
+ .plan{padding:29px 23px}
+ .plan-price{font-size:clamp(1.85rem,3.4vw,2.35rem)}
+ .flow-step{padding-inline:14px}
+}
+
+/* Tablet vertical e telemóvel. */
+@media (max-width:900px){
+ header.hero{padding:118px 0 64px}
+ section{padding:72px 0}
+ .wrap{padding-inline:22px}
+ .nav-inner{padding:16px 22px}
+ .hero-grid,.service-grid,.application-grid,.examples,.ad-examples,.content-grid,.steps,.segment-grid,.compare,.price-grid,.split{grid-template-columns:minmax(0,1fr)!important}
+ .hero-grid{gap:34px}
+ .hero h1{font-size:clamp(2.25rem,8.2vw,3.6rem);line-height:1.04}
+ .hero p.lead{font-size:17px;line-height:1.65}
+ .section-head{max-width:100%;margin-bottom:38px}
+ .section-head h2{font-size:clamp(1.75rem,6.3vw,2.35rem);line-height:1.18}
+ .section-head p{font-size:15px}
+ /* Corrige os painéis que tinham grid-column:span 2 inline e criavam uma segunda coluna invisível. */
+ .solution-panel,.application-grid>.solution-panel,.content-grid>.solution-panel{grid-column:1/-1!important;width:100%!important}
+ .service-card,.application-card,.segment-card,.content-card,.ad-example,.solution-panel,.compare-card,.plan{padding:25px 22px}
+ .service-index,.tech-icon{margin-bottom:16px}
+ .flow{display:grid;grid-template-columns:minmax(0,1fr)!important;overflow:visible;border-radius:14px}
+ .flow-step{width:100%;min-height:0;padding:22px 20px}
+ .flow-step:not(:last-child)::after{right:20px;bottom:-14px;top:auto;transform:none}
+ .product-console{width:100%;padding:12px}
+ .console-visual{min-height:220px;aspect-ratio:auto;grid-template-columns:minmax(0,1fr) 34%}
+ .console-main::after{font-size:15px;max-width:80%}
+ .console-side::after{left:9px;right:9px;font-size:8px}
+ .examples-more{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;padding:22px}
+ .examples-more p{max-width:100%}
+ .plan-group{padding-top:54px}
+ .plan-group-head{margin-bottom:27px}
+ .plan-group-head h3{font-size:clamp(1.5rem,6vw,2rem)}
+ .plan-group-head p{max-width:100%}
+ .price-grid .plan{min-height:0}
+ .plan-price{font-size:clamp(2rem,8vw,2.45rem)}
+ .plan-badge{left:22px}
+ .compare-card li{font-size:14px}
+ .faq-q{font-size:15px;align-items:flex-start}
+ .faq-a{font-size:14px;padding-right:28px}
+ .final-cta{padding:52px 26px}
+ .final-cta p{line-height:1.65}
+ .footer-cols{width:100%;justify-content:space-between}
+ .terminal-divider{padding-inline:22px}
+ .terminal-tag{white-space:normal;text-align:center;line-height:1.35}
+ .seg-fade{height:72px}
+}
+
+/* Telemóveis comuns. */
+@media (max-width:600px){
+ .wrap{padding-inline:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+ .nav-inner{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+ header.hero{padding-top:105px}
+ section{padding:60px 0}
+ .hero h1{font-size:clamp(2.05rem,10.6vw,2.9rem);letter-spacing:-.035em}
+ .hero p.lead{font-size:16px}
+ .eyebrow{font-size:11px;padding:6px 11px;margin-bottom:21px}
+ .hero-ctas{width:100%;gap:11px}
+ .hero-ctas a{display:flex;width:100%;padding:14px 18px}
+ .hero-note{display:block;line-height:1.55}
+ .console-tabs{flex-wrap:wrap}
+ .console-visual{min-height:200px;grid-template-columns:minmax(0,1fr) 31%}
+ .console-main::before{left:12px;top:13px;font-size:8px}
+ .console-main::after{left:12px;right:10px;bottom:14px;font-size:13px}
+ .console-side::after{font-size:7px;bottom:12px}
+ .strip{padding:17px 0}
+ .strip-track{gap:34px}
+ .section-head{margin-bottom:31px}
+ .section-head h2{font-size:clamp(1.65rem,8vw,2.05rem)}
+ .service-card,.application-card,.segment-card,.content-card,.ad-example,.solution-panel,.compare-card,.plan{padding:23px 19px}
+ .service-card h3,.application-card h3,.segment-card h3,.content-card h3,.ad-example h3{font-size:18px}
+ .micro-list{gap:6px}
+ .micro-list span{font-size:10px;padding:5px 8px}
+ .ad-art{height:130px}
+ .steps{gap:34px}
+ .step{padding-top:8px}
+ .plan-group{padding-top:45px}
+ .plan-price{font-size:clamp(1.85rem,10vw,2.25rem)}
+ .plan-price span{font-size:13px}
+ .plan-features li{font-size:13.5px;padding:9px 0}
+ .plan-cta{padding:13px 14px}
+ .media-note,.price-note{padding:17px 16px}
+ .faq-item{padding:19px 0}
+ .faq-q{gap:12px}
+ .faq-a{padding-right:12px}
+ .final-cta{border-radius:18px;padding:45px 19px}
+ .final-cta h2{font-size:clamp(1.65rem,8vw,2.15rem);line-height:1.16}
+ .footer-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px 22px}
+ .footer-col:last-child{grid-column:1/-1}
+ .footer-col a{overflow-wrap:anywhere}
+ .footer-bottom{font-size:11px;line-height:1.55}
+ .terminal-divider{padding-inline:18px;gap:10px}
+ .terminal-tag{font-size:9px}
+}
+
+/* Telemóveis estreitos, incluindo 320–360 px. */
+@media (max-width:380px){
+ .wrap,.nav-inner{padding-left:15px;padding-right:15px}
+ .logo{font-size:20px}
+ .hero h1{font-size:clamp(1.85rem,10.5vw,2.25rem)}
+ .hero p.lead{font-size:15px}
+ .console-visual{min-height:185px;grid-template-columns:minmax(0,1fr) 29%}
+ .console-main::after{font-size:12px}
+ .section-head h2{font-size:1.58rem}
+ .service-card,.application-card,.segment-card,.content-card,.ad-example,.solution-panel,.compare-card,.plan{padding:21px 16px}
+ .plan-price{font-size:1.75rem}
+ .plan-badge{left:16px;font-size:9px}
+ .footer-cols{grid-template-columns:1fr}
+ .footer-col:last-child{grid-column:auto}
+ .terminal-divider .t-line{display:none}
+ .terminal-tag{width:100%}
+}
+
+/* Ecrãs grandes: melhora a leitura sem deixar linhas excessivamente compridas. */
+@media (min-width:1440px){
+ .wrap{max-width:1240px}
+ .hero p.lead,.section-head p{max-width:650px}
+ .service-card p,.application-card p,.content-card p,.segment-card p,.plan-desc{max-width:42ch}
+}
+
+/* Acessibilidade: aumento de texto do sistema sem recortes. */
+@media (max-width:900px){
+ @supports(font-size:clamp(1rem,2vw,2rem)){
+  body{font-size:clamp(15px,2.15vw,16px)}
+ }
+}
+</style>
+
 </head><body>
 
 <nav><div class="nav-inner"><a href="#top" class="logo">A<span class="x">O</span><span class="x">O</span><span class="x">X</span></a><div class="nav-links"><a href="#servicos">Serviços</a><a href="#sites">Sites</a><a href="#anuncios">Anúncios</a><a href="#conteudo">Conteúdo</a><a href="#planos">Planos</a><a href="#faq">Dúvidas</a><a href="https://wa.me/5542999923702?text=Ol%C3%A1%21%20Vi%20a%20AOOX%20e%20quero%20conhecer%20as%20solu%C3%A7%C3%B5es%20de%20Sites%2C%20An%C3%BAncios%20e%20Conte%C3%BAdo." target="_blank" class="nav-cta">Falar com a AOOX</a></div><button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button></div></nav>
@@ -650,8 +828,8 @@ nav .nav-inner{gap:22px}.nav-links{gap:24px}.nav-links a{white-space:nowrap}
 <div class="seg-fade seg-opal-cyan"></div><div class="terminal-divider"><div class="t-line"></div><span class="terminal-tag">// base de conhecimento</span><div class="t-line"></div></div>
 <section id="faq"><div class="wrap" style="max-width:760px"><div class="section-head"><span class="section-label">Dúvidas</span><h2>Antes de perguntar</h2></div><div class="faq-list"><div class="faq-item open"><div class="faq-q">A AOOX trabalha apenas com imóveis?<span class="plus">+</span></div><div class="faq-a">Não. Atendemos imóveis, automóveis, produtos físicos e digitais, barbearias, empresas, profissionais e outros negócios.</div></div><div class="faq-item"><div class="faq-q">Fazem apenas sites?<span class="plus">+</span></div><div class="faq-a">Não. A AOOX trabalha em três áreas: Sites, Anúncios e Conteúdo.</div></div><div class="faq-item"><div class="faq-q">Posso contratar apenas um serviço?<span class="plus">+</span></div><div class="faq-a">Sim. Pode contratar apenas um site, um anúncio específico ou um plano de conteúdo.</div></div><div class="faq-item"><div class="faq-q">Posso combinar serviços?<span class="plus">+</span></div><div class="faq-a">Sim. Os combos combinam sites, anúncios e conteúdo.</div></div><div class="faq-item"><div class="faq-q">O anúncio pago está incluído?<span class="plus">+</span></div><div class="faq-a">Não. Criamos o material do anúncio. O orçamento destinado às plataformas de publicidade é separado.</div></div><div class="faq-item"><div class="faq-q">Preciso de fornecer as fotografias?<span class="plus">+</span></div><div class="faq-a">Normalmente, sim. Fornece as fotografias, vídeos e informações disponíveis, e transformamos o material numa apresentação profissional.</div></div><div class="faq-item"><div class="faq-q">O plano mensal é uma prestação do site?<span class="plus">+</span></div><div class="faq-a">Não. É um serviço contínuo que inclui criação e, conforme o plano, publicação, alojamento, manutenção e suporte enquanto estiver ativo.</div></div></div></div></section>
 <section id="contacto"><div class="wrap"><div class="final-cta"><h2>Tem algo para vender. A AOOX sabe como apresentar.</h2><p>Sites, anúncios e conteúdo profissional para transformar aquilo que vende numa experiência digital mais forte.</p><div class="hero-ctas" style="justify-content:center;position:relative"><a href="https://wa.me/5542999923702?text=Ol%C3%A1%21%20Vi%20a%20AOOX%20e%20quero%20conhecer%20as%20solu%C3%A7%C3%B5es%20de%20Sites%2C%20An%C3%BAncios%20e%20Conte%C3%BAdo." target="_blank" rel="noopener" class="btn-primary">Falar com a AOOX →</a><a href="#servicos" class="btn-ghost">Ver serviços</a></div></div></div></section>
-<footer><div class="wrap"><div class="footer-grid"><div class="footer-brand"><a href="#top" class="logo">A<span class="x">O</span><span class="x">O</span><span class="x">X</span></a><p>AOOX — soluções digitais para apresentar, divulgar e vender.</p></div><div class="footer-cols"><div class="footer-col"><h4>Serviços</h4><a href="#sites">Sites</a><a href="#anuncios">Anúncios</a><a href="#conteudo">Conteúdo</a><a href="#combos">Combos</a></div><div class="footer-col"><h4>Negócios</h4><a href="#segmentos">Imóveis</a><a href="#segmentos">Automóveis</a><a href="#segmentos">Produtos</a><a href="#segmentos">Empresas e serviços</a></div><div class="footer-col"><h4>Contacto</h4><a href="https://wa.me/5542999923702?text=Ol%C3%A1%21%20Vi%20a%20AOOX%20e%20quero%20conhecer%20as%20solu%C3%A7%C3%B5es%20de%20Sites%2C%20An%C3%BAncios%20e%20Conte%C3%BAdo." target="_blank">WhatsApp</a><a href="https://www.instagram.com/aooxwebsites" target="_blank">Instagram</a><a href="mailto:aoox.websites@gmail.com">aoox.websites@gmail.com</a></div></div></div><div class="footer-bottom"><span>© 2026 AOOX. Todos os direitos reservados.</span><span>Presença digital para negócios em diferentes mercados.</span></div></div></footer>
-<script>
+<footer><div class="wrap"><div class="footer-grid"><div class="footer-brand"><a href="#top" class="logo">A<span class="x">O</span><span class="x">O</span><span class="x">X</span></a><p>AOOX — soluções digitais para apresentar, divulgar e vender.</p></div><div class="footer-cols"><div class="footer-col"><h4>Serviços</h4><a href="#sites">Sites</a><a href="#anuncios">Anúncios</a><a href="#conteudo">Conteúdo</a><a href="#combos">Combos</a></div><div class="footer-col"><h4>Negócios</h4><a href="#segmentos">Imóveis</a><a href="#segmentos">Automóveis</a><a href="#segmentos">Produtos</a><a href="#segmentos">Empresas e serviços</a></div><div class="footer-col"><h4>Contacto</h4><a href="https://wa.me/5542999923702?text=Ol%C3%A1%21%20Vi%20a%20AOOX%20e%20quero%20conhecer%20as%20solu%C3%A7%C3%B5es%20de%20Sites%2C%20An%C3%BAncios%20e%20Conte%C3%BAdo." target="_blank">WhatsApp</a><a href="https://www.instagram.com/aooxwebsites" target="_blank">Instagram</a><a href="/cdn-cgi/l/email-protection#5938363621772e3c3b2a302d3c2a193e34383035773a3634"><span class="__cf_email__" data-cfemail="bfded0d0c791c8daddccd6cbdaccffd8d2ded6d391dcd0d2">[email&#160;protected]</span></a></div></div></div><div class="footer-bottom"><span>© 2026 AOOX. Todos os direitos reservados.</span><span>Presença digital para negócios em diferentes mercados.</span></div></div></footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
  document.documentElement.classList.add('js');
  var toggle=document.querySelector('.nav-toggle'), links=document.querySelector('.nav-links');
@@ -665,4 +843,4 @@ nav .nav-inner{gap:22px}.nav-links{gap:24px}.nav-links a{white-space:nowrap}
  if(!reduced) document.querySelectorAll('.ex-card,.plan,.service-card,.segment-card').forEach(function(card){card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.setProperty('--mx',(e.clientX-r.left)+'px');card.style.setProperty('--my',(e.clientY-r.top)+'px');card.style.transform='perspective(900px) rotateX('+(-y*5)+'deg) rotateY('+(x*5)+'deg) translateY(-4px)';});card.addEventListener('mouseleave',function(){card.style.transform='';})});
 })();
 </script>
-</body></html>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2e980005f800cad',t:'MTc4NzMxMzg2Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body></html>
